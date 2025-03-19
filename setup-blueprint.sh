@@ -1,3 +1,13 @@
+set -x
+
+. "`dirname $0`/setup-lib.sh"
+
+if [ -f $OURDIR/train-ticket-done ]; then
+    exit 0
+fi
+
+logtstart "blueprint"
+
 # install go 1.23.1
 sudo su royno7
 wget https://go.dev/dl/go1.23.1.linux-amd64.tar.gz
@@ -42,3 +52,9 @@ git clone https://github.com/Blueprint-uServices/blueprint.git
 cd blueprint
 git reset --hard 061b4fb3d09f29b1273487f2657b6fbea0ac1065
 
+echo "blueprint setup complete"
+
+logtend "blueprint"
+
+touch $OURDIR/blueprint-done
+exit 0
