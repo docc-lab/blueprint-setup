@@ -24,7 +24,7 @@ request = pc.makeRequestRSpec()
 
 # Define the setup command to run your bash script
 # This will create a directory, set ownership, and run your setup script with output logged
-TBCMD = "sudo mkdir -p /local/setup && sudo chown `geni-get user_urn | cut -f4 -d+` /local/setup && sudo -u `geni-get user_urn | cut -f4 -d+` -Hi /bin/bash -c '/local/repository/setup-blueprint.sh >/local/setup/setup.log 2>&1'"
+TBCMD = "sudo mkdir -p /local/setup && sudo chown `geni-get user_urn | cut -f4 -d+` /local/setup && sudo -u `geni-get user_urn | cut -f4 -d+` -Hi /bin/bash -c '/local/repository/my-setup-script.sh >/local/setup/setup.log 2>&1'"
 
 # Variable number of nodes.
 pc.defineParameter("nodeCount", "Number of Nodes", portal.ParameterType.INTEGER, 1,
@@ -194,3 +194,6 @@ for i in range(params.nodeCount):
         node.startVNC()
         pass
     pass
+
+# Print the RSpec to standard output
+pc.printRequestRSpec(request)
